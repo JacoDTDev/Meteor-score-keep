@@ -1,27 +1,30 @@
 import { Meteor } from 'meteor/meteor';
 import React from 'react';
 import ReactDom from 'react-dom';
+import {Tracker} from'meteor/tracker';
+import {Players} from "../imports/api/players";
 
-const renderPlayer=()=>{
-    let numbers =[{name:1,val:1},{name:2,val:2},{name:3,val:3}];
-
-    let newNumber=numbers.map((number)=>{
-        return number.val
+const renderPlayers = function (playersList) {
+    return playersList.map(function (player) {
+        return <p key={player._id}>{player.name} has {player.score} point(s).</p>;
     });
-    console.log(newNumber);
-
-    return [<p key='1'>1</p>,<p key='2'>2</p> ]
 };
 
-Meteor.startup(() => {
-  // code to run on server at startup
-    const title = 'Score Keep';
+Meteor.startup(function () {
+    Tracker.autorun(()=>{
+        const players = Players.find().fetch()
+        let title = 'Score Keep';
+        let name = "Andy";
+        let jsx = (
+            <div>
+                <h1>{title}</h1>
+                <p>Hello {name}!</p>
+                <p>This is my second p.</p>
+                {renderPlayers(players)}
+            </div>
+        );
+        ReactDom.render(jsx,document.getElementById('app'))
+    });
 
-    const jsx = (
-        <div>
-            <h1>{title}</h1>
-            {renderPlayer()}
-        </div>
-    );
-    ReactDom.render(jsx,document.getElementById('app'))
+
 });
