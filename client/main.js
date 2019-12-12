@@ -25,6 +25,7 @@ Meteor.startup(function () {
         );
         ReactDom.render(jsx,document.getElementById('app'))
     });
-
+    //Inset new doc into db
+   // Players.insert({name: 'Tom', score:15});
 
 });
