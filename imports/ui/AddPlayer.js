@@ -9,7 +9,7 @@ const handleSubmit = function(e){
         e.target.playerName.value = '';
         Players.insert({
             name: playerName,
-            score: 0
+            score: this.props.score
         })
     }
 };
@@ -18,7 +18,7 @@ export default class AddPlayer extends React.Component{
     render() {
         return (
             <div>
-                <form onSubmit={handleSubmit}>
+                <form onSubmit={handleSubmit.bind(this)}>
                     <input type='text' name='playerName' placeholder='Player name'/>
                     <button>Add Player</button>
                 </form>

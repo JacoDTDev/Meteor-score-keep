@@ -29,7 +29,7 @@ Meteor.startup(function () {
             <div>
                 <TitleBar title={title}/>
                 {renderPlayers(players)}
-                <AddPlayer/>
+                <AddPlayer score={10}/>
 
             </div>
         );
