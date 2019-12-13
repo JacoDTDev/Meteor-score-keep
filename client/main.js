@@ -6,6 +6,7 @@ import {Tracker} from'meteor/tracker';
 import {Players} from "../imports/api/players";
 //React components
 import TitleBar from "../imports/ui/TitleBar";
+import AddPlayer from "../imports/ui/AddPlayer";
 
 const renderPlayers = function (playersList) {
     return playersList.map(function (player) {
@@ -18,18 +19,7 @@ const renderPlayers = function (playersList) {
 
 };
 
-const handleSubmit = function(e){
-    e.preventDefault();
-    let playerName = e.target.playerName.value;
 
-    if(playerName){
-        e.target.playerName.value = '';
-        Players.insert({
-            name: playerName,
-            score: 0
-        })
-    }
-};
 
 Meteor.startup(function () {
     Tracker.autorun(()=>{
@@ -39,10 +29,8 @@ Meteor.startup(function () {
             <div>
                 <TitleBar title={title}/>
                 {renderPlayers(players)}
-                <form onSubmit={handleSubmit}>
-                    <input type='text' name='playerName' placeholder='Player name'/>
-                    <button>Add Player</button>
-                </form>
+                <AddPlayer/>
+
             </div>
         );
         ReactDom.render(jsx,document.getElementById('app'))

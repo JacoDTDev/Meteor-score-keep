@@ -19,6 +19,6 @@ TitleBar.propTypes={
     title: PropTypes.string.isRequired
 
 };
-// TitleBar.defaultProps = {
-//     title:'Default title'
-// };
+TitleBar.defaultProps = {
+    title:'Default title'
+};
