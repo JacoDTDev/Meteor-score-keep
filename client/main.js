@@ -2,7 +2,10 @@ import { Meteor } from 'meteor/meteor';
 import React from 'react';
 import ReactDom from 'react-dom';
 import {Tracker} from'meteor/tracker';
+//Mongodb
 import {Players} from "../imports/api/players";
+//React components
+import TitleBar from "../imports/ui/TitleBar";
 
 const renderPlayers = function (playersList) {
     return playersList.map(function (player) {
@@ -12,6 +15,7 @@ const renderPlayers = function (playersList) {
             <button onClick={()=> Players.remove({_id:player._id})}>X</button>
         </p>;
     });
+
 };
 
 const handleSubmit = function(e){
@@ -29,14 +33,11 @@ const handleSubmit = function(e){
 
 Meteor.startup(function () {
     Tracker.autorun(()=>{
-        const players = Players.find().fetch()
-        let title = 'Score Keep';
-        let name = "Andy";
+        const players = Players.find().fetch();
+
         let jsx = (
             <div>
-                <h1>{title}</h1>
-                <p>Hello {name}!</p>
-                <p>This is my second p.</p>
+                <TitleBar/>
                 {renderPlayers(players)}
                 <form onSubmit={handleSubmit}>
                     <input type='text' name='playerName' placeholder='Player name'/>
