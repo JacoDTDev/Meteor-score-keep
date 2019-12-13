@@ -1,5 +1,6 @@
 import{Meteor} from "meteor/meteor";
 import React from 'react';
+import PropTypes from 'prop-types';
 
 export default class TitleBar extends React.Component{
     constructor(props) {
@@ -13,5 +14,11 @@ export default class TitleBar extends React.Component{
             </div>
         );
     }
-
 }
+TitleBar.propTypes={
+    title: PropTypes.string.isRequired
+
+};
+// TitleBar.defaultProps = {
+//     title:'Default title'
+// };
